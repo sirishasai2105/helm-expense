@@ -1,0 +1,54 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mysql
+  namespace: expense
+  labels:
+    project: expense
+    environment: dev
+    module: mysql
+    tier: db
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      project: expense
+      environment: dev
+      module: mysql
+      tier: db
+  template:
+    metadata:
+      labels:
+        project: expense
+        environment: dev
+        module: mysql
+        tier: db
+    spec:
+      containers:
+      - name: nginx
+        image: sirishasai2105/mysql:{{ .Values.deployment.version }}
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql
+  namespace: expense
+spec:
+  selector:
+    project: expense
+    environment: dev
+    module: mysql
+    tier: db
+  ports:
+  - name: mysql-svc
+    protocol: TCP
+    port: {{ .Values.service.port }}
+    targetPort: 3306
+
+
+
+
+
+
+
