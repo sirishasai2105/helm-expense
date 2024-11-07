@@ -1,6 +1,6 @@
 deployment:
   replicas: 1
-  imageVersion: apline
+  imageVersion: stable-perl
 service:
   type: LoadBalancer
   port: 80
