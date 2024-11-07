@@ -1,0 +1,4 @@
+deployment:
+  version: v1
+hpa:
+  cpuutilization: 15
